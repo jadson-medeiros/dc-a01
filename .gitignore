@@ -102,3 +102,65 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Binary/package folder\
+[Bb]in/
+pkg/
+
+# Visual Studio Code cache/options directory
+.vscode/
+
+# Haskell
+.conf
+*.o
+*.hi
+*.chi
+*.chs.h
+*.imports
+cabal.sandbox.config
+cabal.config
+
+# Dirs
+.cabal-sandbox
+dist
+vendor
+.vagrant.d
+.stack-work
+bin
+/doc
+
+# CTAGS
+TAGS
+tags
+
+# Emacs/Vim
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+*.org
+.projectile
+
+# OSX
+.DS_Store
+
+# Certificates
+*.pem
