@@ -1,4 +1,6 @@
-import { Router } from 'express';
+import express from 'express';
+const router = express.Router({ mergeParams: true });
+
 import pkg from 'pg';
 const { Pool } = pkg;
 
@@ -6,9 +8,7 @@ const pool = new Pool({
   connectionString: process.env.POSTGRES
 });
 
-const itemsRouter = Router();
-
-itemsRouter.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     sql = 'SELECT * FROM tb01 ORDER BY col_dt DESC limit 10'
     const response = await pool.query(sql);
@@ -18,4 +18,4 @@ itemsRouter.get('/', async (req, res) => {
   }
 });
 
-export default itemsRouter;
+export default router;

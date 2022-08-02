@@ -1,7 +1,7 @@
-import { Router } from 'express';
+import express from 'express';
 import itemsRouter from './item.routes.js';
 
-const routes = Router();
+const routes = express.Router();
 
 routes.use('/tb01', itemsRouter);
 
