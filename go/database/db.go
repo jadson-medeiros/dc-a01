@@ -1,28 +1,30 @@
 package database
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
 	"log"
 
 	_ "github.com/lib/pq"
+	"github.com/vingarcia/ksql"
+	"github.com/vingarcia/ksql/adapters/kpgx"
 )
 
 const (
 	USER_DB     = "postgres"
 	PASSWORD_DB = "postgres"
-	NAME_DB     = "postgres"
 	HOST_DB     = "127.0.0.1"
 	PORT_DB     = "5432"
 )
 
-func ConnectionDB() *sql.DB {
-	connectionString := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", USER_DB, PASSWORD_DB, HOST_DB, PORT_DB, NAME_DB)
+func ConnectionDB() ksql.DB {
+	connectionString := fmt.Sprintf("postgres://%s:%s@%s:%s/postgres?sslmode=disable", USER_DB, PASSWORD_DB, HOST_DB, PORT_DB)
 
-	db, err := sql.Open("postgres", connectionString)
+	ctx := context.Background()
+	db, err := kpgx.New(ctx, connectionString, ksql.Config{})
 
 	if err != nil {
-		log.Panic(("Error with DB CONNECTION"))
+		log.Fatalf("unable connect to database: %s", err)
 	}
 
 	return db

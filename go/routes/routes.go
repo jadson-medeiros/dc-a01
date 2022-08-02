@@ -10,10 +10,10 @@ import (
 	"github.com/jadson-medeiros/dc-a01/middleware"
 )
 
-func HandleRequest() {
+func HandleRequest(controller controllers.Controller) {
 	router := mux.NewRouter()
 	router.Use(middleware.ContetTypeMiddleware)
 
-	router.HandleFunc("/tb01", controllers.CreateNewItem).Methods("Post")
+	router.HandleFunc("/tb01", controller.CreateNewItem).Methods("Post")
 	log.Fatal(http.ListenAndServe(":8000", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(router)))
 }

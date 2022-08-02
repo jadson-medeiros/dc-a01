@@ -6,12 +6,20 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/jadson-medeiros/dc-a01/database"
 	"github.com/jadson-medeiros/dc-a01/domain"
 	"github.com/jadson-medeiros/dc-a01/helpers"
+	"github.com/vingarcia/ksql"
 )
 
-func CreateNewItem(w http.ResponseWriter, r *http.Request) {
+type Controller struct {
+	db ksql.Provider
+}
+
+func NewController(db ksql.Provider) Controller {
+	return Controller{db: db}
+}
+
+func (c Controller) CreateNewItem(w http.ResponseWriter, r *http.Request) {
 	var newItem domain.Item
 	err := json.NewDecoder(r.Body).Decode(&newItem)
 
@@ -20,22 +28,15 @@ func CreateNewItem(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
-
+	newItem.Col_dt = time.Now()
 	var response = helpers.JsonResponse{}
-	db := database.ConnectionDB()
-	defer db.Close()
-
-	sql := `INSERT INTO tb01 (col_texto, col_dt) VALUES($1,$2) RETURNING id;`
-	var lastId int64
-	err = db.QueryRow(sql, newItem.Col_Text, time.Now().String()[0:19]).Scan(&lastId)
+	err = c.db.Insert(r.Context(), ksql.NewTable("tb01"), &newItem)
 
 	if err != nil {
 		log.Printf("Error when tried to insert the data: %v", err)
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
-
-	newItem.Id = lastId
 
 	response = helpers.JsonResponse{
 		Type:    "success",
