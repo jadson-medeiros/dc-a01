@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script type="text/javascript" src="main.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DC-A01</title>
+        <style>
+          th,td,tr,table {
+            border: 1px solid black;
+          }
+        </style>
+    </head>
+
+    <body onload="loadItems()">
+        <header>DC-A01 - TB01</header>
+
+        <div>
+            <form onsubmit="addItem()">
+                <label for="col_texto">Texto:</label>
+                <input name="col_texto" id="col_texto" type="text">
+
+                <button type="submit">Insert</button>
+            </form>
+        </div>
+
+        <div id="table-wrapper">
+            <table>
+            </table>
+        </div>
+
+        <button id="load" onclick="loadItems()">Load Items</button>
+    </body>
+</html>
