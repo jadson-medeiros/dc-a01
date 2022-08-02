@@ -26,8 +26,8 @@ func CreateNewItem(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	sql := `INSERT INTO tb01 (col_texto, col_dt) VALUES($1,$2) RETURNING id;`
-	var lastId int
-	err = db.QueryRow(sql, newItem, time.Now().String()[0:19]).Scan(&lastId)
+	var lastId int64
+	err = db.QueryRow(sql, newItem.Col_Text, time.Now().String()[0:19]).Scan(&lastId)
 
 	if err != nil {
 		log.Printf("Error when tried to insert the data: %v", err)
