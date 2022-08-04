@@ -5,17 +5,16 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRES
+  connectionString: "postgres://postgres:postgres@127.0.0.1:5432/postgres?sslmode=disable"
 });
 
 router.get('/', async (req, res) => {
   try {
-    sql = 'SELECT * FROM tb01 ORDER BY col_dt DESC limit 10'
-    const response = await pool.query(sql);
-    res.status(200).send(response.rows);
-  } catch (err) {
-    return res.status(500).send(err);
+      const { rows } = await pool.query('SELECT * FROM TB01 ORDER BY col_dt DESC LIMIT 10')
+      return res.status(200).send(rows)
+  } catch (error) {
+      return res.status(400).send(error)
   }
-});
+})
 
 export default router;
