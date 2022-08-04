@@ -13,12 +13,12 @@
         </style>
     </head>
 
-    <body onload="loadItems()">
+    <body>
         <header>DC-A01 - TB01</header>
 
         <div>
             <form onsubmit="addItem()">
-                <label for="col_texto">Texto:</label>
+                <label for="col_texto">Text:</label>
                 <input name="col_texto" id="col_texto" type="text">
 
                 <button type="submit">Insert</button>
@@ -26,7 +26,10 @@
         </div>
 
         <div id="table-wrapper">
-            <table>
+            <table id="table">
+                <th>Id</th>
+                <th>Text</th>
+                <th>Date</th>
             </table>
         </div>
 

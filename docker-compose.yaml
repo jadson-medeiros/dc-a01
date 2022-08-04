@@ -26,3 +26,13 @@ services:
       - db
     ports:
       - "127.0.0.1:3000:3000"
+
+  gui:
+    image: gui
+    build:
+      context: ./gui
+    ports:
+      - "8080:80"
+    depends_on:
+      - node
+      - go
