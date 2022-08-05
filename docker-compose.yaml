@@ -8,7 +8,7 @@ services:
     expose:
       - "5432"
     ports:
-      - "127.0.0.1:5432:5432"
+      - "5432:5432"
   go:
     image: go
     build:
@@ -16,7 +16,7 @@ services:
     depends_on:
       - db
     ports:
-      - "127.0.0.1:8000:8000"
+      - "8000:8000"
 
   node:
     image: node
@@ -25,7 +25,7 @@ services:
     depends_on:
       - db
     ports:
-      - "127.0.0.1:3000:3000"
+      - "3000:3000"
 
   gui:
     image: gui

@@ -1,10 +1,10 @@
-FROM golang:1.16-buster as builder
+FROM golang:1.18-buster as builder
 
 WORKDIR /app
 
 COPY . .
 
-RUN CGO_ENABLED=0 go build -o /app/mybin main.go
+RUN go get && CGO_ENABLED=0 go build -o /app/mybin main.go
 
 FROM alpine
 WORKDIR /

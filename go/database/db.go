@@ -13,7 +13,7 @@ import (
 const (
 	USER_DB     = "postgres"
 	PASSWORD_DB = "postgres"
-	HOST_DB     = "127.0.0.1"
+	HOST_DB     = "db"
 	PORT_DB     = "5432"
 )
 

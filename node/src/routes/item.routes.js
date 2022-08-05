@@ -5,7 +5,7 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 const pool = new Pool({
-  connectionString: "postgres://postgres:postgres@127.0.0.1:5432/postgres?sslmode=disable"
+  connectionString: "postgres://postgres:postgres@db:5432/postgres?sslmode=disable"
 });
 
 router.get('/', async (req, res) => {
