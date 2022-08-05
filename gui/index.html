@@ -17,19 +17,18 @@
         <header>DC-A01 - TB01</header>
 
         <div>
-            <form onsubmit="addItem()">
-                <label for="col_texto">Text:</label>
-                <input name="col_texto" id="col_texto" type="text">
-
-                <button type="submit">Insert</button>
-            </form>
+            <label>Text:</label>
+            <textarea id="col_text" cols="30" rows="1"></textarea>
+            <button id="insert" type="submit" onclick="addItem();">Inserir</button>
         </div>
 
         <div id="table-wrapper">
-            <table id="table">
-                <th>Id</th>
-                <th>Text</th>
-                <th>Date</th>
+            <table>
+                <thead>
+                    <th id="id">ID</th>
+                    <th id="col_texto">Text</th>
+                    <th id="col_dt">Date</th>
+                </thead>
             </table>
         </div>
 

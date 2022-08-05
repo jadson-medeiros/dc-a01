@@ -28,6 +28,13 @@ func (c Controller) CreateNewItem(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
+
+	if newItem.Col_Text == "" {
+		log.Printf("Error: missing 'col_text'")
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+
 	newItem.Col_dt = time.Now()
 	var response = helpers.JsonResponse{}
 	err = c.db.Insert(r.Context(), ksql.NewTable("tb01"), &newItem)
